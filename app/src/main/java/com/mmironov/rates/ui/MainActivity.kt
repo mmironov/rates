@@ -1,7 +1,8 @@
-package com.mmironov.rates
+package com.mmironov.rates.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import com.mmironov.rates.R
 
 class MainActivity : AppCompatActivity() {
 
