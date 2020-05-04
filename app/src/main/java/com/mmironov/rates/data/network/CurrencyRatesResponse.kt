@@ -1,5 +1,4 @@
-package com.mmironov.rates.data
-
+package com.mmironov.rates.data.network
 
 import com.google.gson.annotations.SerializedName
 

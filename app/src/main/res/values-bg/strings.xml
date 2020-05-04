@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Rates</string>
+
+    <string name="aud">Австралийски долар</string>
+    <string name="bgn">Български лев</string>
+    <string name="brl">Бразилски реал</string>
+    <string name="cad">Канадски долар</string>
+    <string name="chf">Швейцарски франк</string>
+    <string name="cny">Китайски юан</string>
+    <string name="czk">Чешка крона</string>
+    <string name="dkk">Датска крона</string>
+    <string name="eur">Евро</string>
+    <string name="gbp">Паунд стерлинг</string>
+    <string name="sek">Шведска крона</string>
+    <string name="usd">Щадски долар</string>
+    <string name="default_currency">Валута</string>
+</resources>

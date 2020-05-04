@@ -30,8 +30,12 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
-    kapt {
-        generateStubs = true
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
+
+    dataBinding {
+        enabled = true
     }
 }
 
@@ -42,6 +46,9 @@ dependencies {
     implementation deps.app_compat
     implementation deps.core_ktx
     implementation deps.constraint_layout
+
+    implementation deps.fragment.runtime
+    implementation deps.fragment.runtime_ktx
 
     //Retrofit
     implementation deps.retrofit.runtime
@@ -60,6 +67,11 @@ dependencies {
     implementation deps.dagger.android_support
     kapt deps.dagger.compiler
     kapt deps.dagger.android_support_compiler
+
+    //Room
+    implementation deps.room.runtime
+    implementation deps.room.ktx
+    kapt deps.room.compiler
 
     testImplementation deps.junit
 

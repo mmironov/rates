@@ -1,10 +1,9 @@
 package com.mmironov.rates.ui
 
 import androidx.lifecycle.ViewModel
+import com.mmironov.rates.data.db.Currency
 import com.mmironov.rates.data.repository.CurrencyRepository
-import kotlinx.coroutines.CoroutineStart
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.async
+import kotlinx.coroutines.*
 
 class CurrenciesViewModel(
     private val currencyRepository: CurrencyRepository
@@ -13,5 +12,25 @@ class CurrenciesViewModel(
         GlobalScope.async(start = CoroutineStart.LAZY) {
             currencyRepository.getRates()
         }
+    }
+
+    suspend fun startFetchingRates() {
+        stopFetchingRates()
+        currencyRepository.getRates()
+    }
+
+    fun stopFetchingRates()  {
+        if (currencyRepository.isFetching) {
+            currencyRepository.cancelFetching()
+        }
+    }
+
+    fun saveRates(currencies: List<Currency>) {
+        currencyRepository.saveCurrencies(currencies)
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        currencyRepository.cancelFetching()
     }
 }

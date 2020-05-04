@@ -1,8 +1,6 @@
 package com.mmironov.rates.dagger
 
-import com.mmironov.rates.data.network.CurrencyDataSource
-import com.mmironov.rates.data.network.CurrencyNetworkDataSource
-import com.mmironov.rates.data.network.CurrencyRatesService
+import com.mmironov.rates.data.network.*
 import com.mmironov.rates.data.repository.CurrencyRepository
 import com.mmironov.rates.data.repository.CurrencyRepositoryImpl
 import dagger.Binds
@@ -15,17 +13,25 @@ abstract class CurrencyModule {
 
     @Singleton
     @Binds
-    abstract fun provideCurrencyDataSource(service: CurrencyNetworkDataSource): CurrencyDataSource
+    abstract fun provideCurrencyDataSource(service: CurrencyNetworkDataSource)
+            : CurrencyDataSource
 
     @Singleton
     @Binds
-    abstract fun provideCurrencyRepository(repository: CurrencyRepositoryImpl): CurrencyRepository
+    abstract fun provideCurrencyRepository(repository: CurrencyRepositoryImpl)
+            : CurrencyRepository
+
+    @Singleton
+    @Binds
+    abstract fun provideConnectivityInterceptor(connectivityInterceptor: ConnectivityInterceptorImpl)
+            : ConnectivityInterceptor
 
     @Module
     companion object CurrencyModule {
         @JvmStatic
         @Singleton
         @Provides
-        fun provideCurrencyRatesService(): CurrencyRatesService = CurrencyRatesService()
+        fun provideCurrencyRatesService(connectivityInterceptor: ConnectivityInterceptor)
+                : CurrencyRatesService = CurrencyRatesService(connectivityInterceptor)
     }
 }

@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">Rates</string>
+
+    <string name="aud">Australian Dollar</string>
+    <string name="bgn">Bulgarian Lev</string>
+    <string name="brl">Brazilian Real</string>
+    <string name="cad">Canadian Dollar</string>
+    <string name="chf">Swiss Franc</string>
+    <string name="cny">Chinese Yuan</string>
+    <string name="czk">Czech Koruna</string>
+    <string name="dkk">Danish Krone</string>
+    <string name="eur">Euro</string>
+    <string name="gbp">Pound sterling</string>
+    <string name="sek">Swedish Krona</string>
+    <string name="usd">US Dollar"</string>
+    <string name="default_currency">Currency</string>
 </resources>

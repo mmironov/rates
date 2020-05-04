@@ -1,8 +1,8 @@
 package com.mmironov.rates.data.network
 
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
-import com.mmironov.rates.data.CurrencyRatesResponse
-import kotlinx.coroutines.Deferred
+import okhttp3.OkHttpClient
+import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
@@ -15,15 +15,22 @@ interface CurrencyRatesService {
 
     @GET(LATEST)
     fun getLatestRatesAsync(@Query("base") baseCurrency: String = "EUR")
-            : Deferred<CurrencyRatesResponse>
+            : Call<CurrencyRatesResponse>
 
     companion object {
-        operator fun invoke(): CurrencyRatesService =
-            Retrofit.Builder()
+        operator fun invoke(connectivityInterceptor: ConnectivityInterceptor): CurrencyRatesService {
+            val httpClient = OkHttpClient.Builder()
+                .addInterceptor(connectivityInterceptor)
+                .build()
+
+
+            return Retrofit.Builder()
+                .client(httpClient)
                 .baseUrl(BASE_URL)
                 .addCallAdapterFactory(CoroutineCallAdapterFactory())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
                 .create(CurrencyRatesService::class.java)
+        }
     }
 }
