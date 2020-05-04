@@ -1,16 +1,21 @@
 package com.mmironov.rates.ui.list
 
+import android.content.Context
 import android.graphics.drawable.Drawable
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import androidx.core.content.ContextCompat
 import androidx.databinding.Observable
 import androidx.recyclerview.widget.RecyclerView
 import com.mmironov.rates.RatesApp
+import com.mmironov.rates.RatesApp.Companion.context
 import com.mmironov.rates.data.db.Currency
 import com.mmironov.rates.databinding.CurrencyRowBinding
+import kotlinx.android.synthetic.main.currency_row.view.*
+
 
 class CurrencyAdapter(
     private val currencies: MutableList<CurrencyRow> = mutableListOf()
@@ -53,6 +58,7 @@ class CurrencyAdapter(
                 recalculateAmounts()
             }
         })
+
         notifyDataSetChanged()
     }
 
@@ -84,11 +90,17 @@ class CurrencyAdapter(
         : RecyclerView.ViewHolder(binding.root) {
         fun bind(currencyRow: CurrencyRow) {
             binding.currency = currencyRow
-            if (layoutPosition == 0) {
-                Log.d("FirstRow", "${currencyRow.amount} : ${currencyRow.hashCode()}");
-            }
             binding.row.setOnClickListener(moveFirst())
             binding.executePendingBindings()
+
+            if (layoutPosition == 0) {
+                Log.d("FirstRow", "${currencyRow.amount} : ${currencyRow.hashCode()}");
+                binding.row.amount.requestFocus()
+                binding.row.amount.isFocusableInTouchMode = true
+                binding.row.amount.setSelection(binding.row.amount.text.length)
+            } else {
+                binding.row.amount.isFocusableInTouchMode = false
+            }
         }
 
         private fun moveFirst(): (View) -> Unit = {
@@ -102,9 +114,16 @@ class CurrencyAdapter(
 
                 recyclerView.smoothScrollToPosition(0)
 
+                val inputMethodManager =
+                    context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager?
+                inputMethodManager!!.toggleSoftInput(InputMethodManager.SHOW_FORCED,0);
+
                 val updatedRates = rates.mapIndexed { index, currency ->
-                    currency.copy(index = index)
+                    currency.copy(
+                        index = index,
+                        rate = currency.rate / rates[0].rate)
                 }
+
                 onBaseCurrencyChangedListener?.let { it(updatedRates) }
             }
         }
