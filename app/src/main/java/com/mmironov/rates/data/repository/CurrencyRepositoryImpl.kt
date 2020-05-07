@@ -28,6 +28,7 @@ class CurrencyRepositoryImpl @Inject constructor(
     }
 
     private suspend fun initCurrencies(baseCurrency: String) {
+        job?.cancel()
         job = currencyDataSource.fetchRates(baseCurrency = baseCurrency)
     }
 

@@ -47,7 +47,7 @@ class CurrenciesFragment : ScopedFragment() {
             launch(Dispatchers.IO) {
                 viewModel.stopFetchingRates()
                 viewModel.saveRates(it)
-                viewModel.startFetchingRates()
+                viewModel.restartFetchingRates()
             }
         }
         currencies_list.adapter = adapter

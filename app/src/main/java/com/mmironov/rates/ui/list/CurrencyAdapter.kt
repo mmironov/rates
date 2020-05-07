@@ -94,7 +94,6 @@ class CurrencyAdapter(
             binding.executePendingBindings()
 
             if (layoutPosition == 0) {
-                Log.d("FirstRow", "${currencyRow.amount} : ${currencyRow.hashCode()}");
                 binding.row.amount.requestFocus()
                 binding.row.amount.isFocusableInTouchMode = true
                 binding.row.amount.setSelection(binding.row.amount.text.length)

@@ -20,7 +20,7 @@ class CurrencyNetworkDataSource @Inject constructor(
         while (isActive) {
             try {
                 val latestRates = currencyRatesService.getLatestRatesAsync(baseCurrency).await()
-                Log.d(
+                Log.i(
                     "NetworkDataSource",
                     "from ${Thread.currentThread()}: $latestRates"
                 )

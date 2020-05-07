@@ -29,6 +29,7 @@ versions.material = "1.0.0"
 versions.mockito = "2.25.0"
 versions.mockito_all = "1.10.19"
 versions.mockito_android = "2.25.0"
+versions.mockito_kotlin = "2.2.0"
 versions.mockwebserver = "3.8.1"
 versions.navigation = "2.3.0-alpha01"
 versions.okhttp_logging_interceptor = "3.9.0"
@@ -144,6 +145,8 @@ def mockito = [:]
 mockito.core = "org.mockito:mockito-core:$versions.mockito"
 mockito.all = "org.mockito:mockito-all:$versions.mockito_all"
 mockito.android = "org.mockito:mockito-android:$versions.mockito_android"
+mockito.inline = "org.mockito:mockito-inline:$versions.mockito"
+mockito.kotlin = "com.nhaarman.mockitokotlin2:mockito-kotlin:$versions.mockito_kotlin"
 deps.mockito = mockito
 
 deps.mock_web_server = "com.squareup.okhttp3:mockwebserver:$versions.mockwebserver"

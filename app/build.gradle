@@ -75,6 +75,13 @@ dependencies {
 
     testImplementation deps.junit
 
+    //Mockito
+    testImplementation deps.mockito.core
+    testImplementation deps.mockito.inline
+    testImplementation deps.mockito.kotlin
+    testImplementation deps.coroutines.test
+
+
     androidTestImplementation deps.atsl.ext_junit
 
     androidTestImplementation deps.espresso.core
